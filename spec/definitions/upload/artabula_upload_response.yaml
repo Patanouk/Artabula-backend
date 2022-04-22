@@ -1,0 +1,7 @@
+type: object
+description: "Response received after uploading an Artabule"
+properties:
+  id:
+    type: string
+    format: uuid
+    description: "The id of the Artabula"

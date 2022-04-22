@@ -1,0 +1,19 @@
+type: object
+description: "An Artabula object returned by the API"
+properties:
+  id:
+    type: string
+    format: uuid
+    description: "The id of the Artabula"
+  title:
+    type: string
+  latitude:
+    type: number
+  longitude:
+    type: number
+  author:
+    type: string
+    description: "We will use the phone_id in a first time"
+  background_url:
+    type: string
+    description: "The url of the background of the Artabula"

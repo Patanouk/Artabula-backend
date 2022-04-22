@@ -1,0 +1,17 @@
+type: object
+description: "The request format when uploading an Artabula"
+properties:
+  phone_id:
+    type: string
+  title:
+    type: string
+  latitude:
+    type: number
+  longitude:
+    type: number
+  artabula_background:
+    type: string
+    format: binary
+  artabula_user_content:
+    type: string
+    format: binary

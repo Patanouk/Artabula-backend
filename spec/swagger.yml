@@ -1,0 +1,116 @@
+openapi: 3.0.0
+info:
+  version: "1.0"
+  title: "Artabula"
+  description: "API for the Artabula application"
+  license:
+    name: ""
+servers:
+  - url: "https://to-be-defined/artabule"
+paths:
+
+  /upload:
+    post:
+      summary: "Upload a new Artabula"
+      description: "We need to upload both the background and the background + content. 2 Images in total"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: 'definitions/upload/artabula_upload_body.yaml'
+      responses:
+        "200":
+          description: Successful upload
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions/upload/artabula_upload_response.yaml'
+
+  /find:
+    get:
+      summary: "Get a specific Artabula"
+      description: "Returns a specific Artabula with the background + user uploaded content"
+      parameters:
+        - name: "artabula_id"
+          description: "The id of the Artabula we want to retrieve"
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: "phone_id"
+          description: "The id of the phone making the request"
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "Returns the specific Artabule"
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions/artabula_content.yaml'
+        "404":
+          description: "If the Artabula is not found"
+
+  /nearby:
+    get:
+      summary: "Get the list of nearby Artabula"
+      parameters:
+        - name: "phone_id"
+          description: "The id of the phone making the request"
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: "latitude"
+          description: "latitude of the current user"
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: "longitude"
+          description: "longitude of the current user"
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: "max_artabula"
+          description: "Max number of Artabula to return"
+          in: query
+          required: false
+          schema:
+            type: number
+            default: 20
+        - name: "max_distance"
+          description: "Max distance of nearby Artabula in meters"
+          in: query
+          required: false
+          schema:
+            default: 1000
+            type: number
+      responses:
+        "200":
+          description: "sucessful request"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'definitions/artabula_nearby.yaml'
+
+  /config:
+    get:
+      summary: "Get a config file for a specific phone"
+      description: "Not sure what to put there yet. Let's make (or mock) a call to this endpoint when the app starts"
+      parameters:
+        - name: "phone_id"
+          description: "The id of the phone making the request"
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "sucessful request"

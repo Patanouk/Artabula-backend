@@ -1,0 +1,14 @@
+type: object
+description: "An Artabula object returned by the API"
+properties:
+  id:
+    type: string
+    format: uuid
+  title:
+    type: string
+  author:
+    type: string
+    description: "We will use the phone_id in a first time"
+  content_url:
+    type: string
+    description: "The url of the background + user content of the Artabula"
